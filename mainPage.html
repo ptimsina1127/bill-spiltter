@@ -10,7 +10,7 @@
 
 <body>
 
-    <div id="mainPage">
+    <div id="mainPage" style="background-color: gray;">
         <h1>BillSplitter</h1>
 
         <h3>Split bills for shared group expenses. BillSplitter tell you who owes whom and how to settle debts in
@@ -29,14 +29,14 @@
     <div id="splitPage" style="display: none;">
         <h1>BillSplitter</h1>
 
-        <div id= "main_content">
+        <div id="main_content">
 
         </div>
 
     </div>
 
-    
-    
+
+
 
     <script>
         function splitPageShow() {
@@ -59,7 +59,10 @@
                 <input autocomplete="off" type="text" class="form-control" id="personName${i+1}"
                 placeholder="Name${i+1}">
             </div>
-            <div class="form-group d-flex align-items-center">
+
+            <div id="all_item_amount${i+1}">
+            <div style= "overflow: hidden;" id="one_item_amount${i+1}">
+            <div class="form-group d-flex align-items-center" style="float: left;">
                 <div class="icon"><span class="far fa-envelope"></span></div>
                 <input autocomplete="off" type="email" class="form-control" id="itemName${i+1}"
                 placeholder="Item Name">
@@ -69,22 +72,32 @@
                 <input autocomplete="off" type="email" class="form-control" id="amount${i+1}"
                 placeholder="Amount">
             </div>
+            </div>
+            </div>
             
+            <button class="btn btn-primary mb-3 id = "buttonid${i+1}" onclick="add_more(${i+1})">More(+)</button>
             
-            <div class="btn btn-primary mb-3" id = "buttonid${i+1}">More(+)</div>
-            
-        
-    </div>`;
-                
-                
-                
-         
-                
-               
+            </div>`;
             }
+            document.getElementById("main_content").innerHTML = splitPageHtml;
+        }
 
-            
-            document.getElementById("main_content").innerHTML = splitPageHtml;  
+        function add_more(index){
+            var all_item_amount = document.getElementById("all_item_amount"+String(index));
+            var i = 1;
+            var add_moreHtml = `<div style= "overflow: hidden;" id="one_item_amount${i+1}">
+            <div class="form-group d-flex align-items-center" style="float: left;">
+                <div class="icon"><span class="far fa-envelope"></span></div>
+                <input autocomplete="off" type="email" class="form-control" id="itemName${i+1}"
+                placeholder="Item Name">
+            </div>
+            <div class="form-group d-flex align-items-center">
+                <div class="icon"><span class="far fa-envelope"></span></div>
+                <input autocomplete="off" type="email" class="form-control" id="amount${i+1}"
+                placeholder="Amount">
+            </div>
+            </div>`
+            all_item_amount.innerHTML = all_item_amount.innerHTML + add_moreHtml ;
         }
 
     </script>
