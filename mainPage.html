@@ -39,10 +39,16 @@
 
 
     <script>
+        var numitemsperPerson = [];
         function splitPageShow() {
             var mainpage = document.getElementById("mainPage");
             var splitpage = document.getElementById("splitPage");
             var numPeople = document.getElementById("numpeople").value;
+
+            
+            for (var i = 0 ; i < numPeople ; ++i ){
+                numitemsperPerson.push(0);
+            }
 
             mainpage.style.display = "none";
             splitpage.style.display = "block";
@@ -52,30 +58,33 @@
                 splitPageHtml = splitPageHtml+  `
                 <div class="wrapper">
         
-            <div class="h5 font-weight-bold text-center mb-3">Split Wise App</div>
+            <div class="h5 font-weight-bold text-center mb-3">Person ${i}</div>
             <br>
             <div class="form-group d-flex align-items-center">
                 <div class="icon"><span class="far fa-user"></span></div>
-                <input autocomplete="off" type="text" class="form-control" id="personName${i+1}"
-                placeholder="Name${i+1}">
+                <input autocomplete="off" type="text" class="form-control" id="personName${i}"
+                placeholder="Name${i}">
             </div>
 
-            <div id="all_item_amount${i+1}">
-            <div style= "overflow: hidden;" id="one_item_amount${i+1}">
+        
+
+            <div id="all_item_amount${i}">
+            <div style= "overflow: hidden;" id="one_item_amount${i}-0">
             <div class="form-group d-flex align-items-center" style="float: left;">
                 <div class="icon"><span class="far fa-envelope"></span></div>
-                <input autocomplete="off" type="email" class="form-control" id="itemName${i+1}"
+                <input autocomplete="off" type="email" class="form-control" id="itemName${i}-0"
                 placeholder="Item Name">
             </div>
             <div class="form-group d-flex align-items-center">
                 <div class="icon"><span class="far fa-envelope"></span></div>
-                <input autocomplete="off" type="email" class="form-control" id="amount${i+1}"
+                <input autocomplete="off" type="email" class="form-control" id="amount${i}-0"
                 placeholder="Amount">
             </div>
+
             </div>
             </div>
             
-            <button class="btn btn-primary mb-3 id = "buttonid${i+1}" onclick="add_more(${i+1})">More(+)</button>
+            <button class="btn btn-primary mb-3 id = "buttonid${i}" onclick="add_more(${i})">More(+)</button>
             
             </div>`;
             }
@@ -84,16 +93,19 @@
 
         function add_more(index){
             var all_item_amount = document.getElementById("all_item_amount"+String(index));
-            var i = 1;
-            var add_moreHtml = `<div style= "overflow: hidden;" id="one_item_amount${i+1}">
+            //var i = 1;
+            numitemsperPerson[index]= numitemsperPerson[index] + 1 ; 
+            var latest_count = numitemsperPerson[index];
+
+            var add_moreHtml = `<div style= "overflow: hidden;" id="one_item_amount${index}-${latest_count}">
             <div class="form-group d-flex align-items-center" style="float: left;">
                 <div class="icon"><span class="far fa-envelope"></span></div>
-                <input autocomplete="off" type="email" class="form-control" id="itemName${i+1}"
+                <input autocomplete="off" type="email" class="form-control" id="itemName${index}-${latest_count}"
                 placeholder="Item Name">
             </div>
             <div class="form-group d-flex align-items-center">
                 <div class="icon"><span class="far fa-envelope"></span></div>
-                <input autocomplete="off" type="email" class="form-control" id="amount${i+1}"
+                <input autocomplete="off" type="email" class="form-control" id="amount${index}-${latest_count}"
                 placeholder="Amount">
             </div>
             </div>`
