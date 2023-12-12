@@ -1,1 +1,1 @@
-# bill-spiltter
+# bill-splitter
